@@ -1,7 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp/colors.dart';
+import 'package:whatsapp/common/widgets/error.dart';
+import 'package:whatsapp/common/widgets/loader.dart';
+import 'package:whatsapp/features/auth/controller/auth_controller.dart';
 import 'package:whatsapp/features/landing/screens/landing_screen.dart';
 import 'package:whatsapp/firebase_options.dart';
 import 'package:whatsapp/responsive/responsive_layout.dart';
@@ -18,12 +23,12 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Whatsapp',
@@ -34,7 +39,18 @@ class MyApp extends StatelessWidget {
         ),
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: const LandingScreen(),
+      home: ref.watch(userDataAuthProvider).when(
+            data: (user) {
+              if (user == null) {
+                return LandingScreen();
+              }
+              return MobileScreenLayout();
+            },
+            error: (err, trace) {
+              return ErrorScreen(error: err.toString());
+            },
+            loading: () => Loader(),
+          ),
       // home: const ResponsiveLayout(
       //   mobileScreenLayout: MobileScreenLayout(),
       //   webScreenLayout: WebScreenLayout(),
