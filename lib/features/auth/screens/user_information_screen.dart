@@ -46,47 +46,50 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  image == null
-                      ? CircleAvatar(
-                          radius: 64,
-                          backgroundImage: NetworkImage(
-                              "https://www.clevelanddentalhc.com/wp-content/uploads/2018/03/sample-avatar.jpg"),
-                        )
-                      : CircleAvatar(
-                          radius: 64,
-                          backgroundImage: FileImage(image!),
-                        ),
-                  Positioned(
-                    bottom: -10,
-                    left: 80,
-                    child: IconButton(
-                      onPressed: selectImage,
-                      icon: Icon(Icons.photo),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    image == null
+                        ? CircleAvatar(
+                            radius: 64,
+                            backgroundImage: NetworkImage(
+                                "https://www.clevelanddentalhc.com/wp-content/uploads/2018/03/sample-avatar.jpg"),
+                          )
+                        : CircleAvatar(
+                            radius: 64,
+                            backgroundImage: FileImage(image!),
+                          ),
+                    Positioned(
+                      bottom: -10,
+                      left: 80,
+                      child: IconButton(
+                        onPressed: selectImage,
+                        icon: Icon(Icons.photo),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Container(
-                    width: size.width * 0.85,
-                    padding: EdgeInsets.all(20),
-                    child: TextField(
-                      controller: nameController,
-                      decoration: InputDecoration(hintText: 'Enter your name.'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Container(
+                      width: size.width * 0.85,
+                      padding: EdgeInsets.all(20),
+                      child: TextField(
+                        controller: nameController,
+                        decoration:
+                            InputDecoration(hintText: 'Enter your name.'),
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: storeUserData,
-                    icon: Icon(Icons.done),
-                  ),
-                ],
-              ),
-            ],
+                    IconButton(
+                      onPressed: storeUserData,
+                      icon: Icon(Icons.done),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

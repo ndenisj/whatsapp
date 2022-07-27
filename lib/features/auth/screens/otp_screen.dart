@@ -26,29 +26,31 @@ class OTPScreen extends ConsumerWidget {
         backgroundColor: backgroundColor,
       ),
       body: Center(
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            Text("We have sent an sms with a code."),
-            SizedBox(
-              width: size.width * 0.5,
-              child: TextField(
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                  hintText: '- - - - - -',
-                  hintStyle: TextStyle(
-                    fontSize: 30,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              Text("We have sent an sms with a code."),
+              SizedBox(
+                width: size.width * 0.5,
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                    hintText: '- - - - - -',
+                    hintStyle: TextStyle(
+                      fontSize: 30,
+                    ),
                   ),
+                  keyboardType: TextInputType.number,
+                  onChanged: (val) {
+                    if (val.length == 6) {
+                      verifyOTP(ref, context, val.trim());
+                    }
+                  },
                 ),
-                keyboardType: TextInputType.number,
-                onChanged: (val) {
-                  if (val.length == 6) {
-                    verifyOTP(ref, context, val.trim());
-                  }
-                },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

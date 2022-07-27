@@ -6,6 +6,7 @@ import 'package:whatsapp/info.dart';
 import 'package:whatsapp/widgets/chat_list.dart';
 
 class MobileChatScreen extends StatelessWidget {
+  static const String routeName = '/mobile-chat-screen';
   const MobileChatScreen({Key? key}) : super(key: key);
 
   @override
@@ -30,40 +31,42 @@ class MobileChatScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(child: ChatList()),
-          TextField(
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: mobileChatBoxColor,
-              prefixIcon: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Icon(
-                  Icons.emoji_emotions_outlined,
-                  color: Colors.grey,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(child: ChatList()),
+            TextField(
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: mobileChatBoxColor,
+                prefixIcon: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Icon(
+                    Icons.emoji_emotions_outlined,
+                    color: Colors.grey,
+                  ),
                 ),
-              ),
-              suffixIcon: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(Icons.camera_alt, color: Colors.grey),
-                    Icon(Icons.attach_file, color: Colors.grey),
-                    Icon(Icons.money, color: Colors.grey),
-                  ],
+                suffixIcon: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Icon(Icons.camera_alt, color: Colors.grey),
+                      Icon(Icons.attach_file, color: Colors.grey),
+                      Icon(Icons.money, color: Colors.grey),
+                    ],
+                  ),
                 ),
+                hintText: 'Type a message',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(width: 0, style: BorderStyle.none),
+                ),
+                contentPadding: EdgeInsets.all(10),
               ),
-              hintText: 'Type a message',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-                borderSide: BorderSide(width: 0, style: BorderStyle.none),
-              ),
-              contentPadding: EdgeInsets.all(10),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
